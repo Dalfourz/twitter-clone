@@ -17,7 +17,7 @@ export default function Sidebar() {
       <nav className="h-full relative xl:space-y-1.5">
         <div className="flex justify-center items-center xl:justify-start py-3 xl:p-3">
           <Image
-            src={"/public/assets/twitter-logo.png"}
+            src={"/assets/twitter-logo.png"}
             width={34}
             height={34}
           />
