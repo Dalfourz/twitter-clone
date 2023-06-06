@@ -1,4 +1,10 @@
-import { CalendarIcon, ChartBarIcon, EmojiHappyIcon, LocationMarkerIcon, PhotographIcon } from "@heroicons/react/outline";
+import {
+  CalendarIcon,
+  ChartBarIcon,
+  EmojiHappyIcon,
+  LocationMarkerIcon,
+  PhotographIcon,
+} from "@heroicons/react/outline";
 
 export default function TweetInput() {
   return (
@@ -22,27 +28,27 @@ export default function TweetInput() {
           {/* Icons Div */}
           <div className="flex space-x-0">
             <div className="iconAnimation">
-                <PhotographIcon className="h-[22px] text-[#1d9bf0]"/>
+              <PhotographIcon className="h-[22px] text-[#1d9bf0]" />
             </div>
             <div className="iconAnimation">
-                <ChartBarIcon className="h-[22px] text-[#1d9bf0]"/>
+              <ChartBarIcon className="h-[22px] text-[#1d9bf0]" />
             </div>
             <div className="iconAnimation">
-                <EmojiHappyIcon className="h-[22px] text-[#1d9bf0]"/>
+              <EmojiHappyIcon className="h-[22px] text-[#1d9bf0]" />
             </div>
             <div className="iconAnimation">
-                <CalendarIcon className="h-[22px] text-[#1d9bf0]"/>
+              <CalendarIcon className="h-[22px] text-[#1d9bf0]" />
             </div>
             <div className="iconAnimation">
-                <LocationMarkerIcon className="h-[22px] text-[#1d9bf0]"/>
+              <LocationMarkerIcon className="h-[22px] text-[#1d9bf0]" />
             </div>
           </div>
-        </div>
 
-        <button className="bg-[#1d9bf0] rounded-full px-4 py-1.5"
-        >Tweet</button>
+          <button className="bg-[#1d9bf0] rounded-full px-4 py-1.5">
+            Tweet
+          </button>
+        </div>
       </div>
-      Tweet here
     </div>
   );
 }
