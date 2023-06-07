@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
 import { auth } from "@/firebase";
 import { setUser } from "@/redux/userSlice";
+import { useRouter } from "next/router";
 
 export default function SignupModal() {
   //   const [isOpen, setisOpen] = useState(false);
@@ -22,6 +24,8 @@ export default function SignupModal() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
+  const router = useRouter()
+
   async function handleSignup() {
     const userCredentials = await createUserWithEmailAndPassword(
       auth,
@@ -31,18 +35,25 @@ export default function SignupModal() {
 
     await updateProfile(auth.currentUser, {
       displayName: name,
-      photoURL: `./assets/profilePictures/pfp${Math.ceil(Math.random() * 6 )}.png`
-    })
+      photoURL: `./assets/profilePictures/pfp${Math.ceil(
+        Math.random() * 6
+      )}.png`,
+    });
+    router.reload()
+  }
+
+  async function handleGuestSignIn() {
+    await signInWithEmailAndPassword(auth, "guest8989@gmail.com", "guest1234567")
   }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser) return;
-      console.log(currentUser)
+      console.log(currentUser);
       dispatch(
         setUser({
           username: currentUser.email.split("@")[0],
-          name: name,
+          name: currentUser.displayName,
           email: currentUser.email,
           uid: currentUser.uid,
           photoUrl: currentUser.photoURL,
@@ -69,7 +80,8 @@ export default function SignupModal() {
       >
         <div className="w-[90%] h-[600px] bg-black text-white md:w-[560px] md:h-[600px] border border-gray-700 rounded-lg flex justify-center">
           <div className="w-[90%] mt-8 flex flex-col">
-            <button className="bg-white text-black w-full font-bold text-lg p-2 rounded-md">
+            <button className="bg-white text-black w-full font-bold text-lg p-2 rounded-md"
+            onClick={handleGuestSignIn}>
               Sign In as Guest
             </button>
             <h1 className="text-center mt-4 font-bold text-lg">or</h1>
