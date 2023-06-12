@@ -16,6 +16,7 @@ export default function TweetInput() {
   const [text, setText] = useState("");
 
   async function sendTweet() {
+
     const docRef = await addDoc(collection(db, "posts"), {
       username: user.username,
       name: user.name,
@@ -23,11 +24,12 @@ export default function TweetInput() {
       uid: user.uid,
       timestamp: serverTimestamp(),
       likes: [],
-      tweet: text,
+      tweet: text
     });
 
     setText("");
   }
+
   return (
     <div className=" space-x-3 p-3 border-b border-gray-700">
       <img
@@ -47,7 +49,7 @@ export default function TweetInput() {
         <div></div>
         <img />
       </div>
-      
+
       <div className="flex justify-between border-t border-gray-700 pt-4">
         {/* Icons Div */}
         <div className="flex space-x-0">
