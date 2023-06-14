@@ -20,7 +20,7 @@ export async function getServerSideProps(context) {
     text: data.tweet,
     comments: data.comments || null,
     timestamp: JSON.stringify(data.timestamp.toDate()),
-    image: data.image || null
+    image: data.image || null,
   };
 
   return {
@@ -38,7 +38,7 @@ export default function CommentsPage({ tweetData }) {
         <Sidebar />
 
         <div className="sm:ml-16 xl:ml-[350px] max-w-2xl flex-grow border-gray-700 border-x">
-          <div className="flex space-x-1 px-3 py-2 text-lg sm:text-xl font-bold border-b border-gray-700 sticky top-0 z-50">
+          <div className="flex space-x-2 px-3 py-2 text-lg sm:text-xl font-bold border-b border-gray-700 sticky top-0 z-50">
             <Link href={"/"}>
               <ArrowLeftIcon className="w-7 cursor-pointer" />
             </Link>
@@ -61,6 +61,14 @@ export default function CommentsPage({ tweetData }) {
                 </div>
 
                 <span className="text-2xl">{tweetData.text}</span>
+
+                {tweetData.image && (
+                  <img
+                    className="object-cover rounded-md mt-3 max-h-80 border border-gray-700"
+                    src={tweetData.image}
+                    alt=""
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -74,6 +82,7 @@ export default function CommentsPage({ tweetData }) {
               />
               <h1 className="text-2xl text-gray-500">Tweet your Reply</h1>
             </div>
+            
             <button
               disabled={true}
               className="bg-[#1d9bf0] rounded-full px-4 py-1.5 
@@ -85,23 +94,22 @@ export default function CommentsPage({ tweetData }) {
 
           {tweetData.comments?.map((comment) => (
             <div className="border-b border-gray-700">
-            <div className="flex space-x-3 p-3 border-gray-700">
-              <img
-                className="w-11 h-11 rounded-full object-cover"
-                src={comment.photoUrl}
-                alt=""
-              />
-              <div>
-                <div className="text-gray-500 flex items-center space-x-2 mb-1">
-                  <h1 className="text-white font-bold">{comment.name}</h1>
-                  <span>@{comment.username}</span>
-                </div>
+              <div className="flex space-x-3 p-3 border-gray-700">
+                <img
+                  className="w-11 h-11 rounded-full object-cover"
+                  src={comment.photoUrl}
+                  alt=""
+                />
+                <div>
+                  <div className="text-gray-500 flex items-center space-x-2 mb-1">
+                    <h1 className="text-white font-bold">{comment.name}</h1>
+                    <span>@{comment.username}</span>
+                  </div>
 
-                <span>{comment.comment}</span>
+                  <span>{comment.comment}</span>
+                </div>
               </div>
             </div>
-          </div>
-
           ))}
         </div>
         <Trending />
